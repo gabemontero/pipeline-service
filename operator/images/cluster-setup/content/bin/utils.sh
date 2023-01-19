@@ -32,6 +32,7 @@ check_deployments() {
     if ! timeout 300s bash -c "while ! kubectl get deployment/$deploy -n $ns >/dev/null 2>/dev/null; do printf '.'; sleep 10; done"; then
       printf "%s not found (timeout)\n" "$deploy"
       kubectl get deployment/"$deploy" -n "$ns"
+      kubectl -n "$ns" get events | grep Warning
       exit 1
     else
       printf "Exists"
@@ -43,6 +44,7 @@ check_deployments() {
     else
       kubectl -n "$ns" describe "deployment/$deploy"
       kubectl -n "$ns" logs "deployment/$deploy"
+      kubectl -n "$ns" get events | grep Warning
       exit 1
     fi
   done
@@ -62,6 +64,7 @@ check_pod_by_label() {
     i=$((i+1))
     if [[ $i -eq "${numOfAttempts}" ]]; then
       printf "\n[ERROR] Pod %s not found by timeout \n" "$label" >&2
+      kubectl -n "$ns" get events | grep Warning
       exit 1
     fi
   done
@@ -75,6 +78,7 @@ check_pod_by_label() {
     printf "\n[ERROR] Pod %s failed to start\n" "$label" >&2
     kubectl -n "$ns" describe pod -l "$label" 
     kubectl -n "$ns" logs -l "$label" 
+    kubectl -n "$ns" get events | grep Warning
     exit 1
   fi
 }

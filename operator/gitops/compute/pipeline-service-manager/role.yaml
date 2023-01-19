@@ -23,6 +23,8 @@ rules:
       - serviceaccounts
       - services
       - pods
+      - pods/log
+      - events
     verbs:
       - "*"
   - apiGroups:
