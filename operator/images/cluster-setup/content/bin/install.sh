@@ -167,6 +167,9 @@ install_minio() {
 
   check_deployments "openshift-operators" "minio-operator" | indent 2
 
+  echo -n "- Display Minio Subscription information for potential debug: "
+  kubectl -n openshift-operators get subscriptions minio-operator -o yaml
+
   echo -n "- Minio tenant: "
   kubectl apply -k "$DEV_DIR/operators/$APP/tenant" >/dev/null
   echo "OK"
