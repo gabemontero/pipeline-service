@@ -43,8 +43,9 @@ check_deployments() {
       printf ", Ready\n"
     else
       kubectl -n "$ns" describe "deployment/$deploy"
-      kubectl -n "$ns" logs "deployment/$deploy"
-      kubectl -n "$ns" get events | grep Warning
+      kubectl -n "$ns" get deployment "$deploy" -o yaml
+      kubectl -n "$ns" get events
+      kubectl -n "$ns" get pods
       exit 1
     fi
   done

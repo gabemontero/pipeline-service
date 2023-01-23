@@ -161,14 +161,26 @@ install_minio() {
   #############################################################################
   # Install the minio operator
   #############################################################################
-  echo -n "- Minio: "
-  kubectl apply -k "$DEV_DIR/operators/$APP" >/dev/null
-  echo "OK"
+#  echo -n "- Minio: "
+#  kubectl apply -k "$DEV_DIR/operators/$APP" >/dev/null
+#  echo "OK"
+  # we are using helm to install the operator until we sort out the stale operator hub content in hypershift
+
+  # this download of helm will go away if/when https://github.com/openshift-pipelines/pipeline-service/pull/451 merges
+  curl -L https://mirror.openshift.com/pub/openshift-v4/clients/helm/latest/helm-linux-amd64 -o ./helm
+  chmod +x ./helm
+  # now for the minio part even after PR 451
+  kubectl get deployments -n openshift-operators
+
+  # NOTE, while I could download the 4.5.8 tgz from the minio/operator repo and gunzip / tar -xvzf it from my fedora laptop
+  # running those commands from the ci-runner image kept failing saying the file was not in zip format.  tar -xvf also failed.
+  # So I extracted the tgz, tweaked the values.yaml for our needs, and then checked in the files under deveoper/operators/minio/operator.
+  ./helm upgrade --install --namespace openshift-operators minio-operator "$DEV_DIR/operators/$APP/operator"
 
   check_deployments "openshift-operators" "minio-operator" | indent 2
 
-  echo -n "- Display Minio Subscription information for potential debug: "
-  kubectl -n openshift-operators get subscriptions minio-operator -o yaml
+#  echo -n "- Display Minio Subscription information for potential debug: "
+#  kubectl -n openshift-operators get subscriptions minio-operator -o yaml
 
   echo -n "- Minio tenant: "
   kubectl apply -k "$DEV_DIR/operators/$APP/tenant" >/dev/null
