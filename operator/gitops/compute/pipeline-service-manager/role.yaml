@@ -118,6 +118,14 @@ rules:
       - "get"
       - "create"
       - "update"
+  - apiGroups:
+      - security.openshift.io
+    resourceNames:
+      - nonroot
+    resources:
+      - securitycontextconstraints
+    verbs:
+      - use
 # this is the start of permissions we have to add so that the pipeline-service-manager can create clusterroles for minio with these permissions.
 # we only need this while we are using helm to install minio to work around the stale operator catalogs on hypershift.
   - apiGroups:

@@ -44,7 +44,7 @@ spec:
   imagePullSecret: {}
   mountPath: /export
   subPath: ""
-  serviceAccountName: ""
+  serviceAccountName: "minio"
   pools:
     - servers: 1
       name: pool-0
