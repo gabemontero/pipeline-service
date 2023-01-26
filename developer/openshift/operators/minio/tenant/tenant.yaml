@@ -68,7 +68,6 @@ spec:
               storage: 1Gi
         status: {}
       securityContext: {}
-      # runAsNonRoot: true
-      # runAsUser: 1000630001
-      # runAsGroup: 1000630002
+      containerSecurityContext:
+        runAsGroup: 0
   requestAutoCert: true
