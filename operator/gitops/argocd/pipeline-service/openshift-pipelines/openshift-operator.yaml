@@ -9,3 +9,10 @@ spec:
   name: openshift-pipelines-operator-rh
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+  config:
+    env:
+      # see https://github.com/tektoncd/operator/blob/main/operatorhub/openshift/config.yaml
+      - name: IMAGE_PIPELINES_TEKTON_PIPELINES_CONTROLLER
+        value: docker.io/gmontero/controller-10a3e32792f33651396d02b6855a6e36:latest
+      - name: IMAGE_PIPELINES_CONTROLLER
+        value: docker.io/gmontero/resolvers-ff86b24f130c42b88983d3c13993056d
