@@ -9,7 +9,6 @@ resources:
   - watcher-logging-rbac.yaml
   - service-monitor.yaml
   - watcher-rbac.yaml
-  - api-rbac.yaml
 
 images:
   - name: ko://github.com/tektoncd/results/cmd/api
