@@ -9,11 +9,12 @@ resources:
   - watcher-logging-rbac.yaml
   - service-monitor.yaml
   - watcher-rbac.yaml
+  - api-rbac.yaml
 
 images:
   - name: ko://github.com/tektoncd/results/cmd/api
     newName: quay.io/gabemontero/results-api
-    newTag: v1
+    newTag: v2
   - name: ko://github.com/tektoncd/results/cmd/watcher
     newName: quay.io/gabemontero/results-watcher
     newTag: v1
