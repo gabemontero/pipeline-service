@@ -9,14 +9,15 @@ resources:
   - watcher-logging-rbac.yaml
   - service-monitor.yaml
   - watcher-rbac.yaml
+  - api-rbac.yaml
 
 images:
   - name: ko://github.com/tektoncd/results/cmd/api
     newName: quay.io/gabemontero/results-api
-    newTag: v3
+    newTag: v1
   - name: ko://github.com/tektoncd/results/cmd/watcher
     newName: quay.io/gabemontero/results-watcher
-    newTag: v5
+    newTag: v1
 
 # generate a new configmap with updated values (logs api, db ssl mode) and replace the default one
 configMapGenerator:
