@@ -16,7 +16,7 @@ images:
     newTag: v4
   - name: ko://github.com/tektoncd/results/cmd/watcher
     newName: quay.io/gabemontero/results-watcher
-    newTag: v5
+    newTag: v6
 
 # generate a new configmap with updated values (logs api, db ssl mode) and replace the default one
 configMapGenerator:
