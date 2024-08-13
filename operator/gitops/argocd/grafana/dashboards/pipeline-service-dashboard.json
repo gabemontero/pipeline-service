@@ -419,15 +419,13 @@
       "type": "stat"
     },
     {
-      "description": "Taskrun throttled by kubernetes quota",
+      "description": "The number of validated ResolutionRequests not yet processed by the Resolver Controller.",
       "fieldConfig": {
         "defaults": {
           "color": {
             "mode": "thresholds"
           },
           "mappings": [],
-          "max": 1,
-          "min": 0,
           "noValue": "No data",
           "thresholds": {
             "mode": "absolute",
@@ -442,17 +440,17 @@
               }
             ]
           },
-          "unit": "percentunit"
+          "unit": "percent"
         },
         "overrides": []
       },
       "gridPos": {
         "h": 9,
         "w": 4,
-        "x": 20,
-        "y": 1
+        "x": 0,
+        "y": 2
       },
-      "id": 480,
+      "id": 483,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
@@ -473,13 +471,13 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(increase(pipeline_service_execution_overhead_percentage_sum{status='succeded'}[30m]))",
+          "expr": "sum(increase(pending_resolutionrequest_count[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
         }
       ],
-      "title": "Taskrun throttled by Kubernetes quota",
+      "title": "Deadlocked ResolutionRequests",
       "type": "stat"
     },
     {
