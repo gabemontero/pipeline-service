@@ -227,7 +227,7 @@
       "type": "stat"
     },
     {
-      "description": "The number of times any of the pipelines controllers hav restarted",
+      "description": "The number of times any of the tekton controllers have restarted",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -281,7 +281,7 @@
       "targets": [
         {
           "editorMode": "code",
-          "expr": "sum(increase(kube_pod_container_status_restarts_total{namespace=\"openshift-pipelines\", pod=~\"tekton-.*\"}[2m]))",
+          "expr": "sum(increase(kube_pod_container_status_restarts_total{namespace=\"openshift-pipelines\", pod=~\"tekton-.*\"}[$__range]))",
           "legendFormat": "__auto",
           "range": true,
           "refId": "A"
