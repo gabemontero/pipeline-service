@@ -88,6 +88,9 @@ spec:
     options:
       disabled: false
       configMaps:
+        tekton-chains-config-observability:
+          data:
+            profiling.enable: "true"
         config-logging:
           data:
             loglevel.controller: info
